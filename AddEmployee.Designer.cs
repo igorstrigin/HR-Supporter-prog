@@ -41,6 +41,9 @@
             this.cbGroup = new System.Windows.Forms.ComboBox();
             this.dtStart = new System.Windows.Forms.DateTimePicker();
             this.btAdd = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.tbPassword = new System.Windows.Forms.TextBox();
+            this.btAddEmployer = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tbSurname
@@ -153,6 +156,7 @@
             // dtStart
             // 
             this.dtStart.CalendarFont = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dtStart.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtStart.Location = new System.Drawing.Point(162, 216);
             this.dtStart.Name = "dtStart";
             this.dtStart.Size = new System.Drawing.Size(200, 20);
@@ -168,11 +172,42 @@
             this.btAdd.UseVisualStyleBackColor = true;
             this.btAdd.Click += new System.EventHandler(this.btAdd_Click);
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label7.Location = new System.Drawing.Point(12, 255);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(61, 19);
+            this.label7.TabIndex = 15;
+            this.label7.Text = "Пароль:";
+            // 
+            // tbPassword
+            // 
+            this.tbPassword.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbPassword.Location = new System.Drawing.Point(79, 252);
+            this.tbPassword.Name = "tbPassword";
+            this.tbPassword.Size = new System.Drawing.Size(283, 26);
+            this.tbPassword.TabIndex = 16;
+            // 
+            // btAddEmployer
+            // 
+            this.btAddEmployer.Location = new System.Drawing.Point(16, 301);
+            this.btAddEmployer.Name = "btAddEmployer";
+            this.btAddEmployer.Size = new System.Drawing.Size(154, 23);
+            this.btAddEmployer.TabIndex = 17;
+            this.btAddEmployer.Text = "Добавить начальника";
+            this.btAddEmployer.UseVisualStyleBackColor = true;
+            this.btAddEmployer.Click += new System.EventHandler(this.btAddEmployer_Click);
+            // 
             // AddEmployee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(377, 336);
+            this.Controls.Add(this.btAddEmployer);
+            this.Controls.Add(this.tbPassword);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.btAdd);
             this.Controls.Add(this.dtStart);
             this.Controls.Add(this.cbGroup);
@@ -208,5 +243,8 @@
         private System.Windows.Forms.ComboBox cbGroup;
         private System.Windows.Forms.DateTimePicker dtStart;
         private System.Windows.Forms.Button btAdd;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox tbPassword;
+        private System.Windows.Forms.Button btAddEmployer;
     }
 }

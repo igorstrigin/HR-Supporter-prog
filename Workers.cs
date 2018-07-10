@@ -9,18 +9,21 @@ namespace SalaryGUI
 {
     class Workers
     {
+        public static int tempID { get; set; }
         public int IDEmployee { get; set; }
         public DateTime EntryDate { get; set; }
         public int StartSalary { get; set; }
         public string FIO { get; set; }
-        public string Group { get; set; }
+        public string Password { get; set; }
+        
 
-        public Workers(string fio, int idEmployee, DateTime entrydate, int startSalary, string Group) 
+        public Workers(string fio, int idEmployee, DateTime entrydate, int startSalary, string password) 
         {
             IDEmployee = idEmployee;
             EntryDate = entrydate;
             StartSalary = startSalary;
             FIO = fio;
+            Password = password;
         }
     }
 
@@ -28,36 +31,42 @@ namespace SalaryGUI
          class Employee : Workers
          {
             private int Salary;
-            public Employee(int salary,string fio, int idEmployee, DateTime entrydate, int startSalary, string Group) : base(fio, idEmployee, entrydate, startSalary, Group)
+            public static string Group = "Работник";
+            public int ParentID;
+            public Employee(int salary,string fio, int idEmployee, DateTime entrydate, int startSalary, string Group, string Password, int parentID) : base(fio, idEmployee, entrydate, startSalary, Password)
             {
             salary = Convert.ToInt32(StartSalary + (DateTime.Now.Year - EntryDate.Year) * StartSalary * 0.03);
             if (salary > StartSalary * 1.3) { salary = Convert.ToInt32(StartSalary * 1.3); }
             Salary = salary;
-            Group = "Работник";
+            ParentID = parentID;
             }
          }
 
         class Manager : Workers
         {
             private int Salary;
-            public Manager(int salary, string fio, int idEmployee, DateTime entrydate, int startSalary, string Group) : base(fio, idEmployee, entrydate, startSalary,Group)
+            public static string Group = "Менеджер";
+            public int ParentID;
+            public Manager(int salary, string fio, int idEmployee, DateTime entrydate, int startSalary, string Group, string Password, int parentID) : base(fio, idEmployee, entrydate, startSalary,Password)
             {
                 salary = Convert.ToInt32(StartSalary + (DateTime.Now.Year - EntryDate.Year) * StartSalary * 0.05);
                 if (salary > StartSalary * 1.4) { salary = Convert.ToInt32(StartSalary * 1.4); }
                 Salary = salary;
-                Group = "Менеджер";
+                ParentID = parentID;
             }
         }
 
         class Salesman : Workers
         {
             private int Salary;
-            public Salesman(int salary, string fio, int idEmployee, DateTime entrydate, int startSalary, string Group) : base(fio, idEmployee, entrydate, startSalary,Group)
+            public static string Group = "Продавец";
+            public int ParentID;
+            public Salesman(int salary, string fio, int idEmployee, DateTime entrydate, int startSalary, string Group, string Password, int parentID) : base(fio, idEmployee, entrydate, startSalary,Password)
             {
             salary = Convert.ToInt32(StartSalary + (DateTime.Now.Year - EntryDate.Year) * StartSalary * 0.01);
             if (salary > StartSalary * 1.35) { salary = Convert.ToInt32(StartSalary * 1.35); }
             Salary = salary;
-            Group = "Продавец";
-            }
-    }
+            ParentID = parentID;
+        }
+        }
 }
