@@ -52,7 +52,7 @@
             this.tbSurname.Location = new System.Drawing.Point(93, 26);
             this.tbSurname.Name = "tbSurname";
             this.tbSurname.Size = new System.Drawing.Size(269, 26);
-            this.tbSurname.TabIndex = 0;
+            this.tbSurname.TabIndex = 1;
             // 
             // tbName
             // 
@@ -60,7 +60,7 @@
             this.tbName.Location = new System.Drawing.Point(58, 64);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(304, 26);
-            this.tbName.TabIndex = 1;
+            this.tbName.TabIndex = 2;
             // 
             // tbSecondName
             // 
@@ -68,7 +68,7 @@
             this.tbSecondName.Location = new System.Drawing.Point(93, 100);
             this.tbSecondName.Name = "tbSecondName";
             this.tbSecondName.Size = new System.Drawing.Size(269, 26);
-            this.tbSecondName.TabIndex = 2;
+            this.tbSecondName.TabIndex = 3;
             // 
             // tbStartSalary
             // 
@@ -76,7 +76,7 @@
             this.tbStartSalary.Location = new System.Drawing.Point(220, 136);
             this.tbStartSalary.Name = "tbStartSalary";
             this.tbStartSalary.Size = new System.Drawing.Size(142, 26);
-            this.tbStartSalary.TabIndex = 3;
+            this.tbStartSalary.TabIndex = 4;
             this.tbStartSalary.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbStartSalary_KeyPress);
             // 
             // label1
@@ -144,30 +144,31 @@
             this.cbGroup.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cbGroup.FormattingEnabled = true;
             this.cbGroup.Items.AddRange(new object[] {
-            "Рабочий",
+            "Работник",
             "Менеджер",
             "Продавец"});
             this.cbGroup.Location = new System.Drawing.Point(105, 171);
             this.cbGroup.Name = "cbGroup";
             this.cbGroup.Size = new System.Drawing.Size(257, 27);
-            this.cbGroup.TabIndex = 12;
+            this.cbGroup.TabIndex = 5;
             this.cbGroup.SelectedIndexChanged += new System.EventHandler(this.cbGroup_SelectedIndexChanged);
             // 
             // dtStart
             // 
             this.dtStart.CalendarFont = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dtStart.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dtStart.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtStart.Location = new System.Drawing.Point(162, 216);
+            this.dtStart.Location = new System.Drawing.Point(162, 212);
             this.dtStart.Name = "dtStart";
-            this.dtStart.Size = new System.Drawing.Size(200, 20);
-            this.dtStart.TabIndex = 13;
+            this.dtStart.Size = new System.Drawing.Size(200, 26);
+            this.dtStart.TabIndex = 6;
             // 
             // btAdd
             // 
             this.btAdd.Location = new System.Drawing.Point(208, 301);
             this.btAdd.Name = "btAdd";
             this.btAdd.Size = new System.Drawing.Size(154, 23);
-            this.btAdd.TabIndex = 14;
+            this.btAdd.TabIndex = 9;
             this.btAdd.Text = "Добавить сотрудника";
             this.btAdd.UseVisualStyleBackColor = true;
             this.btAdd.Click += new System.EventHandler(this.btAdd_Click);
@@ -187,15 +188,16 @@
             this.tbPassword.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbPassword.Location = new System.Drawing.Point(79, 252);
             this.tbPassword.Name = "tbPassword";
+            this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(283, 26);
-            this.tbPassword.TabIndex = 16;
+            this.tbPassword.TabIndex = 7;
             // 
             // btAddEmployer
             // 
             this.btAddEmployer.Location = new System.Drawing.Point(16, 301);
             this.btAddEmployer.Name = "btAddEmployer";
             this.btAddEmployer.Size = new System.Drawing.Size(154, 23);
-            this.btAddEmployer.TabIndex = 17;
+            this.btAddEmployer.TabIndex = 8;
             this.btAddEmployer.Text = "Добавить начальника";
             this.btAddEmployer.UseVisualStyleBackColor = true;
             this.btAddEmployer.Click += new System.EventHandler(this.btAddEmployer_Click);

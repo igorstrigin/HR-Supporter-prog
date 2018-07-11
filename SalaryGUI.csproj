@@ -62,6 +62,12 @@
     <Compile Include="AddEmployer.Designer.cs">
       <DependentUpon>AddEmployer.cs</DependentUpon>
     </Compile>
+    <Compile Include="CalcSalary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CalcSalary.Designer.cs">
+      <DependentUpon>CalcSalary.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,6 +82,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddEmployer.resx">
       <DependentUpon>AddEmployer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CalcSalary.resx">
+      <DependentUpon>CalcSalary.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>

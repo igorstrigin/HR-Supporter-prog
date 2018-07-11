@@ -45,20 +45,14 @@ namespace SalaryGUI
             int idEmployee = GetEmployeeId();
             DateTime Startdt = dtStart.Value;
             Startdt = Startdt.Date;
-            int salary;
+            int salary = 0;
             string Group;
             string Password = tbPassword.Text;
             int ParentID = 0;
             SQLiteConnection DB = new SQLiteConnection(@"Data Source=Salary.db;Pooling=true;FailIfMissing=false;Version=3");
             SQLiteCommand AddInBase = new SQLiteCommand(DB);
             AddInBase.Connection = DB;
-            AddInBase.CommandText = "insert into MainInfo(IDEmployee,FIO,EntryDate,StartSalary,'Group',Password,ParentID) values (@IDEmployee,@FIO,@EntryDate,@StartSalary,@Group,@Password,@ParentID)";
-            //AddInBase.Parameters.AddWithValue("@IDEmployee", idEmployee);
-            //AddInBase.Parameters.AddWithValue("@FIO", FIO);
-            //AddInBase.Parameters.AddWithValue("@EntryDate", Startdt);
-            //AddInBase.Parameters.AddWithValue("@StartSalary", StartSalary);
-            //AddInBase.Parameters.AddWithValue("@Password", Password);
-            //AddInBase.Parameters.AddWithValue("@ParentID", ParentID);
+            AddInBase.CommandText = "insert into MainInfo(IDEmployee,FIO,EntryDate,StartSalary,'Group',Password,ParentID,Salary) values (@IDEmployee,@FIO,@EntryDate,@StartSalary,@Group,@Password,@ParentID,@Salary)";
 
             switch (cbGroup.Text)
             {
@@ -74,6 +68,7 @@ namespace SalaryGUI
                     AddInBase.Parameters.AddWithValue("@Password", employee.Password);
                     AddInBase.Parameters.AddWithValue("@ParentID", employee.ParentID);
                     AddInBase.Parameters.AddWithValue("@Group", Employee.Group);
+                    AddInBase.Parameters.AddWithValue("@Salary", employee.Salary);
                     break;
                 case "Менеджер":
                     Group = "Менеджер";
@@ -87,6 +82,7 @@ namespace SalaryGUI
                     AddInBase.Parameters.AddWithValue("@Password",      Manager.Password);
                     AddInBase.Parameters.AddWithValue("@ParentID",      Manager.ParentID);
                     AddInBase.Parameters.AddWithValue("@Group",         Manager.Group);
+                    AddInBase.Parameters.AddWithValue("@Salary",        Manager.Salary);
                     break;
                 case "Продавец":
                     Group = "Продавец";
@@ -100,6 +96,7 @@ namespace SalaryGUI
                     AddInBase.Parameters.AddWithValue("@Password",          Salesman.Password);
                     AddInBase.Parameters.AddWithValue("@ParentID",          Salesman.ParentID);
                     AddInBase.Parameters.AddWithValue("@Group",             Salesman.Group);
+                    AddInBase.Parameters.AddWithValue("@Salary",            Salesman.Salary);
                     break;
                 default: MessageBox.Show("значение 'Группа' не должно быть пустым");
                     break;
@@ -107,7 +104,7 @@ namespace SalaryGUI
             AddInBase.Connection.Open();
             AddInBase.ExecuteNonQuery();
             AddInBase.Connection.Close();
-            MessageBox.Show("Сотрудник" + FIO + " добавлен");
+            MessageBox.Show("Сотрудник: " + FIO + " добавлен/n/r Зарплата: " + salary.ToString());
         }
 
         private void tbStartSalary_KeyPress(object sender, KeyPressEventArgs e)
