@@ -54,73 +54,32 @@ namespace SalaryGUI
         private void button1_Click(object sender, EventArgs e)
         {
             int datecalc = dtSalary.Value.Year - dateTime.Year;
+            int id = 0;
+            SQLiteConnection DB = new SQLiteConnection(@"Data Source=Salary.db;Pooling=true;FailIfMissing=false;Version=3");
+            SQLiteCommand getid = new SQLiteCommand(DB);
+            getid.CommandText = "select IDEmployee from MainInfo where FIO=@FIO";
+            getid.Parameters.AddWithValue("@FIO", lFIO.Text);
+            getid.Connection.Open();
+            id = Convert.ToInt32(getid.ExecuteScalar());
+
+
             if (dtSalary.Value.Month - dateTime.Month < 0) {datecalc--; }
             switch (lGroup.Text)
             {
                 case "1)Работник":
-                    lSalary.Text = Convert.ToString(Convert.ToInt32(lStartSalary.Text) + datecalc * Convert.ToInt32(lStartSalary.Text) * 0.03);
-                    if (Convert.ToInt32(lSalary.Text) > Convert.ToInt32(lStartSalary.Text) * 1.3) { lSalary.Text = Convert.ToString(Convert.ToInt32(lStartSalary.Text) * 1.3); }
+                    int exp = Convert.ToInt32( Convert.ToUInt32(lStartSalary.Text) + (dtSalary.Value.Year - Convert.ToDateTime(lStartDateTime.Text).Year) * Convert.ToUInt32(lStartSalary.Text) * 0.03);
+                    if (exp > Convert.ToUInt32(lStartSalary.Text) * 1.3) { exp = Convert.ToInt32(Convert.ToUInt32(lStartSalary.Text) * 1.35); }
+                    lSalary.Text = exp.ToString();
                     break;
                 case "2)Менеджер":
-                    SQLiteConnection DB = new SQLiteConnection(@"Data Source=Salary.db;Pooling=true;FailIfMissing=false;Version=3");
-                    SQLiteCommand ManagerPlus = new SQLiteCommand(DB);
-                    ManagerPlus.Connection = DB;
-                    ManagerPlus.CommandText = "select Salary as Количество from MainInfo where ParentId = @ParentId";
-                    ManagerPlus.Parameters.AddWithValue("@ParentID", ParentID);
-                    try
-                    {
-                        ManagerPlus.Connection.Open();
-                        SQLiteDataReader dr1 = ManagerPlus.ExecuteReader();
-                        if (dr1.HasRows)
-                        {
-                            while (dr1.Read())
-                            {
-                                Salary = Salary + Convert.ToInt32(dr1.GetDouble(0) * 0.005);
-                                MessageBox.Show(Salary.ToString());
-                            }
-                        }
-                        dr1.Close();
-                    }
-                    catch (Exception ex) { MessageBox.Show(ex.ToString());}
-                    finally
-                    {
-
-                        ManagerPlus.Connection.Close();
-                        lSalary.Text = Convert.ToString(Convert.ToInt32(lStartSalary.Text) + datecalc * Convert.ToInt32(lStartSalary.Text) * 0.05 + Salary);
-                        if (Convert.ToInt32(lSalary.Text) > Convert.ToInt32(lStartSalary.Text) * 1.4)
-                        { lSalary.Text = Convert.ToString(Convert.ToInt32(lStartSalary.Text) * 1.4); }
-                        Salary = 0;
-                    }
-                        break;
+                    int exp1 = Convert.ToInt32(Convert.ToUInt32(lStartSalary.Text) + (dtSalary.Value.Year - Convert.ToDateTime(lStartDateTime.Text).Year) * Convert.ToUInt32(lStartSalary.Text) * 0.05);
+                    if (exp1 > Convert.ToUInt32(lStartSalary.Text) * 1.35) { exp = Convert.ToInt32(Convert.ToUInt32(lStartSalary.Text) * 1.35); }
+                    lSalary.Text =Convert.ToString(exp1 + Convert.ToInt32(Manager.GetManagerplusInCalc(id, dtSalary.Value) * 0.005));
+                    break;
                 case "3)Продавец":
-                    SQLiteConnection DB1 = new SQLiteConnection(@"Data Source=Salary.db;Pooling=true;FailIfMissing=false;Version=3");
-                    SQLiteCommand SalerPlus = new SQLiteCommand(DB1);
-                    SalerPlus.Connection = DB1;
-                    SalerPlus.CommandText = "with NewTable as (select MainInfo.IDEmployee, MainInfo.ParentID, MainInfo.Salary from MainInfo where IDEmployee = @IDEmployee union all select N.IDEmployee, N.ParentID, N.Salary from NewTable inner join MainInfo N on NewTable.IDEmployee = N.ParentID) select Salary from NewTable";
-                    SalerPlus.Parameters.AddWithValue("@IDEmployee", IDEmployee);
-                    try
-                    {
-                        SalerPlus.Connection.Open();
-                        SQLiteDataReader dr2 = SalerPlus.ExecuteReader();
-                        if (dr2.HasRows)
-                        {
-                            while (dr2.Read())
-                            {
-                                Salary = Salary + Convert.ToInt32(dr2.GetDouble(0) * 0.003);
-                                MessageBox.Show(Salary.ToString());
-                            }
-                        }
-                        dr2.Close();
-                    }
-                    catch (Exception ex) { MessageBox.Show(ex.ToString()); }
-                    finally
-                    {
-                        SalerPlus.Connection.Close();
-                        lSalary.Text = Convert.ToString(Convert.ToInt32(lStartSalary.Text) + datecalc * Convert.ToInt32(lStartSalary.Text) * 0.01 + Salary);
-                        if (Convert.ToInt32(lSalary.Text) > Convert.ToInt32(lStartSalary.Text) * 1.4)
-                        { lSalary.Text = Convert.ToString(Convert.ToInt32(lStartSalary.Text) * 1.4); }
-                        Salary = 0;
-                    }
+                    int exp2 = Convert.ToInt32(Convert.ToUInt32(lStartSalary.Text) + (dtSalary.Value.Year - Convert.ToDateTime(lStartDateTime.Text).Year) * Convert.ToUInt32(lStartSalary.Text) * 0.01);
+                    if (exp2 > Convert.ToUInt32(lStartSalary.Text) * 1.3) { exp = Convert.ToInt32(Convert.ToUInt32(lStartSalary.Text) * 1.3); }
+                    lSalary.Text = Convert.ToString(exp2 + Convert.ToInt32(Salesman.GetSalesManplusInCalc(id, DateTime.Now) * 0.003));
                     break;
                 default: break;
             }
