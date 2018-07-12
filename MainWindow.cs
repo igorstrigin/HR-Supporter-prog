@@ -37,6 +37,10 @@ namespace SalaryGUI
             dataAdapter.Fill(ds);
             dataGridView1.DataSource = ds.Tables[0].DefaultView;
             OpenTable.Connection.Close();
+            SQLiteCommand fullsalary = new SQLiteCommand(DB);
+            OpenTable.CommandText = "select SUM(Salary) from MainInfo";
+            OpenTable.Connection.Open();
+            label2.Text = OpenTable.ExecuteScalar().ToString();
         }
 
         private void btCalcSalary_Click(object sender, EventArgs e)
