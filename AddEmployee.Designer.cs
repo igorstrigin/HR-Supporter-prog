@@ -144,9 +144,9 @@
             this.cbGroup.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cbGroup.FormattingEnabled = true;
             this.cbGroup.Items.AddRange(new object[] {
-            "Работник",
-            "Менеджер",
-            "Продавец"});
+            "1)Работник",
+            "2)Менеджер",
+            "3)Продавец"});
             this.cbGroup.Location = new System.Drawing.Point(105, 171);
             this.cbGroup.Name = "cbGroup";
             this.cbGroup.Size = new System.Drawing.Size(257, 27);

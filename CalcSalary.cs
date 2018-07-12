@@ -40,18 +40,10 @@ namespace SalaryGUI
                     lStartDateTime.Text = dr.GetValue(2).ToString();
                     lGroup.Text = dr.GetValue(3).ToString();
                     obj1.ParentID= dr.GetInt32(4);
-                    IDEmployee = dr.GetInt32(5);
+                    obj1.IDEmployee = dr.GetInt32(5);
                 }
             }
             CalcSalary.Connection.Close();
-            switch (lGroup.Text) {
-                case "Работник":
-                    lSalary.Text = Convert.ToString(Convert.ToInt32(lStartSalary.Text) + (DateTime.Now.Year - dateTime.Year) * Convert.ToInt32(lStartSalary.Text) * 0.03);
-                    break;
-                case "Менеджер": break;
-                case "Продавец": break;
-                default: break;
-            }
         }
 
         private void CalcSalary_Load(object sender, EventArgs e)
@@ -65,11 +57,11 @@ namespace SalaryGUI
             if (dtSalary.Value.Month - dateTime.Month < 0) {datecalc--; }
             switch (lGroup.Text)
             {
-                case "Работник":
+                case "1)Работник":
                     lSalary.Text = Convert.ToString(Convert.ToInt32(lStartSalary.Text) + datecalc * Convert.ToInt32(lStartSalary.Text) * 0.03);
                     if (Convert.ToInt32(lSalary.Text) > Convert.ToInt32(lStartSalary.Text) * 1.3) { lSalary.Text = Convert.ToString(Convert.ToInt32(lStartSalary.Text) * 1.3); }
                     break;
-                case "Менеджер":
+                case "2)Менеджер":
                     SQLiteConnection DB = new SQLiteConnection(@"Data Source=Salary.db;Pooling=true;FailIfMissing=false;Version=3");
                     SQLiteCommand ManagerPlus = new SQLiteCommand(DB);
                     ManagerPlus.Connection = DB;
@@ -100,7 +92,7 @@ namespace SalaryGUI
                         Salary = 0;
                     }
                         break;
-                case "Продавец":
+                case "3)Продавец":
                     SQLiteConnection DB1 = new SQLiteConnection(@"Data Source=Salary.db;Pooling=true;FailIfMissing=false;Version=3");
                     SQLiteCommand SalerPlus = new SQLiteCommand(DB1);
                     SalerPlus.Connection = DB1;

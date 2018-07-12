@@ -11,7 +11,7 @@ using System.Data.SQLite;
 
 namespace SalaryGUI
 {
-    public partial class AddEmployer : AddEmployee
+    public partial class AddEmployer : Form
     {
         public AddEmployer()
         {
