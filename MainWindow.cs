@@ -97,8 +97,8 @@ namespace SalaryGUI
             }
             for (int i = 0; i < group.Count; i++)
             {
-                MessageBox.Show(FIO[i]);
-                MessageBox.Show(idemployee[i].ToString());
+                //MessageBox.Show(FIO[i]);
+                //MessageBox.Show(idemployee[i].ToString());
 
                 switch (group[i])
                 {

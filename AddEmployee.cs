@@ -32,13 +32,13 @@ namespace SalaryGUI
             }
             else { result = 1; }
             AddNewEmployee.Connection.Close();
-            MessageBox.Show("ID =" + result);
+            //MessageBox.Show("ID =" + result);
             return result;
         }
 
 
 
-        private void btAdd_Click(object sender, EventArgs e) 
+        private void btAdd_Click(object sender, EventArgs e)
         {
             string FIO = tbSurname.Text + " " + tbName.Text + " " + tbSecondName.Text;
             int StartSalary = Convert.ToInt32(tbStartSalary.Text);
@@ -53,58 +53,62 @@ namespace SalaryGUI
             SQLiteCommand AddInBase = new SQLiteCommand(DB);
             AddInBase.Connection = DB;
             AddInBase.CommandText = "insert into MainInfo(IDEmployee,FIO,EntryDate,StartSalary,'Group',Password,ParentID,Salary) values (@IDEmployee,@FIO,@EntryDate,@StartSalary,@Group,@Password,@ParentID,@Salary)";
-
-            switch (cbGroup.Text)
+            try
             {
-                case "1)Работник":
-                    Group = "1)Работник";
-                    ParentID = Workers.tempID;
-                    salary = Convert.ToInt32(StartSalary + (DateTime.Now.Year - Startdt.Year) * StartSalary * 0.03);
-                    Employee employee = new Employee(salary, FIO, idEmployee, Startdt, StartSalary, Group,Password,ParentID);
-                    AddInBase.Parameters.AddWithValue("@IDEmployee", employee.IDEmployee);
-                    AddInBase.Parameters.AddWithValue("@FIO", employee.FIO);
-                    AddInBase.Parameters.AddWithValue("@EntryDate", employee.EntryDate);
-                    AddInBase.Parameters.AddWithValue("@StartSalary", employee.StartSalary);
-                    AddInBase.Parameters.AddWithValue("@Password", employee.Password);
-                    AddInBase.Parameters.AddWithValue("@ParentID", employee.ParentID);
-                    AddInBase.Parameters.AddWithValue("@Group", Employee.Group);
-                    AddInBase.Parameters.AddWithValue("@Salary", employee.Salary);
-                    break;
-                case "2)Менеджер":
-                    Group = "2)Менеджер";
-                    ParentID = Workers.tempID;
-                    salary = Manager.GetManagerplusInCreate(ParentID); ;
-                    Manager manager = new Manager(salary, FIO, idEmployee, Startdt, StartSalary, Group, Password, ParentID);
-                    AddInBase.Parameters.AddWithValue("@IDEmployee",    manager.IDEmployee);
-                    AddInBase.Parameters.AddWithValue("@FIO",           manager.FIO);
-                    AddInBase.Parameters.AddWithValue("@EntryDate",     manager.EntryDate);
-                    AddInBase.Parameters.AddWithValue("@StartSalary",   manager.StartSalary);
-                    AddInBase.Parameters.AddWithValue("@Password",      manager.Password);
-                    AddInBase.Parameters.AddWithValue("@ParentID",      manager.ParentID);
-                    AddInBase.Parameters.AddWithValue("@Group",         Manager.Group);
-                    AddInBase.Parameters.AddWithValue("@Salary",        manager.Salary);
-                    break;
-                case "3)Продавец":
-                    Group = "3)Продавец";
-                    salary = Salesman.GetSalesManplusInCreate(idEmployee);
-                    ParentID = Workers.tempID;
-                    Salesman salesman = new Salesman(salary, FIO, idEmployee, Startdt, StartSalary, Group, Password, ParentID);
-                    AddInBase.Parameters.AddWithValue("@IDEmployee",        salesman.IDEmployee);
-                    AddInBase.Parameters.AddWithValue("@FIO",               salesman.FIO);
-                    AddInBase.Parameters.AddWithValue("@EntryDate",         salesman.EntryDate);
-                    AddInBase.Parameters.AddWithValue("@StartSalary",       salesman.StartSalary);
-                    AddInBase.Parameters.AddWithValue("@Password",          salesman.Password);
-                    AddInBase.Parameters.AddWithValue("@ParentID",          salesman.ParentID);
-                    AddInBase.Parameters.AddWithValue("@Group",             Salesman.Group);
-                    AddInBase.Parameters.AddWithValue("@Salary",            salesman.Salary);
-                    break;
-                default: MessageBox.Show("значение 'Группа' не должно быть пустым");
-                    break;
+                switch (cbGroup.Text)
+                {
+                    case "1)Работник":
+                        Group = "1)Работник";
+                        ParentID = Workers.tempID;
+                        salary = Convert.ToInt32(StartSalary + (DateTime.Now.Year - Startdt.Year) * StartSalary * 0.03);
+                        Employee employee = new Employee(salary, FIO, idEmployee, Startdt, StartSalary, Group, Password, ParentID);
+                        AddInBase.Parameters.AddWithValue("@IDEmployee", employee.IDEmployee);
+                        AddInBase.Parameters.AddWithValue("@FIO", employee.FIO);
+                        AddInBase.Parameters.AddWithValue("@EntryDate", employee.EntryDate);
+                        AddInBase.Parameters.AddWithValue("@StartSalary", employee.StartSalary);
+                        AddInBase.Parameters.AddWithValue("@Password", employee.Password);
+                        AddInBase.Parameters.AddWithValue("@ParentID", employee.ParentID);
+                        AddInBase.Parameters.AddWithValue("@Group", Employee.Group);
+                        AddInBase.Parameters.AddWithValue("@Salary", employee.Salary);
+                        break;
+                    case "2)Менеджер":
+                        Group = "2)Менеджер";
+                        ParentID = Workers.tempID;
+                        salary = Manager.GetManagerplusInCreate(ParentID); ;
+                        Manager manager = new Manager(salary, FIO, idEmployee, Startdt, StartSalary, Group, Password, ParentID);
+                        AddInBase.Parameters.AddWithValue("@IDEmployee", manager.IDEmployee);
+                        AddInBase.Parameters.AddWithValue("@FIO", manager.FIO);
+                        AddInBase.Parameters.AddWithValue("@EntryDate", manager.EntryDate);
+                        AddInBase.Parameters.AddWithValue("@StartSalary", manager.StartSalary);
+                        AddInBase.Parameters.AddWithValue("@Password", manager.Password);
+                        AddInBase.Parameters.AddWithValue("@ParentID", manager.ParentID);
+                        AddInBase.Parameters.AddWithValue("@Group", Manager.Group);
+                        AddInBase.Parameters.AddWithValue("@Salary", manager.Salary);
+                        break;
+                    case "3)Продавец":
+                        Group = "3)Продавец";
+                        salary = Salesman.GetSalesManplusInCreate(idEmployee);
+                        ParentID = Workers.tempID;
+                        Salesman salesman = new Salesman(salary, FIO, idEmployee, Startdt, StartSalary, Group, Password, ParentID);
+                        AddInBase.Parameters.AddWithValue("@IDEmployee", salesman.IDEmployee);
+                        AddInBase.Parameters.AddWithValue("@FIO", salesman.FIO);
+                        AddInBase.Parameters.AddWithValue("@EntryDate", salesman.EntryDate);
+                        AddInBase.Parameters.AddWithValue("@StartSalary", salesman.StartSalary);
+                        AddInBase.Parameters.AddWithValue("@Password", salesman.Password);
+                        AddInBase.Parameters.AddWithValue("@ParentID", salesman.ParentID);
+                        AddInBase.Parameters.AddWithValue("@Group", Salesman.Group);
+                        AddInBase.Parameters.AddWithValue("@Salary", salesman.Salary);
+                        break;
+                    default:
+                        MessageBox.Show("значение 'Группа' не должно быть пустым");
+                        break;
+                }
+                AddInBase.Connection.Open();
+                AddInBase.ExecuteNonQuery();
+                MessageBox.Show("Сотрудник: " + FIO + " добавлен \r\nЗарплата: " + salary.ToString());
             }
-            AddInBase.Connection.Open();
-            AddInBase.ExecuteNonQuery();
-            AddInBase.Connection.Close();
-            MessageBox.Show("Сотрудник: " + FIO + " добавлен /n Зарплата: " + salary.ToString());
+            catch (Exception) { MessageBox.Show("Проверьте заполнение всех ячеек"); }
+            finally { AddInBase.Connection.Close(); }
         }
 
         private void tbStartSalary_KeyPress(object sender, KeyPressEventArgs e)

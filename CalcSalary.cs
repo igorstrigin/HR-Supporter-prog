@@ -14,9 +14,9 @@ namespace SalaryGUI
     public partial class CalcSalary : Form
     {
         DateTime dateTime;
-        int Salary;
-        int ParentID;
-        int IDEmployee;
+        //int Salary;
+        //int ParentID;
+        //int IDEmployee;
         public CalcSalary(Workers obj1)
         {
             InitializeComponent();

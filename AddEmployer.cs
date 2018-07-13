@@ -56,7 +56,7 @@ namespace SalaryGUI
             ParentID = Convert.ToInt32(AddEmployer.ExecuteScalar());
             AddEmployer.Connection.Close();
             Workers.tempID = ParentID;
-            MessageBox.Show(Convert.ToString(Workers.tempID));
+            //MessageBox.Show(Convert.ToString(Workers.tempID));
             this.Close();
         }
     }

@@ -54,7 +54,7 @@
             // 
             // btAddEmployer
             // 
-            this.btAddEmployer.Location = new System.Drawing.Point(281, 172);
+            this.btAddEmployer.Location = new System.Drawing.Point(149, 145);
             this.btAddEmployer.Name = "btAddEmployer";
             this.btAddEmployer.Size = new System.Drawing.Size(136, 23);
             this.btAddEmployer.TabIndex = 2;
@@ -66,12 +66,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(436, 215);
+            this.ClientSize = new System.Drawing.Size(436, 196);
             this.Controls.Add(this.btAddEmployer);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cbSelectEmployer);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "AddEmployer";
-            this.Text = "AddEmployer";
+            this.Text = "Добавить начальника";
             this.Load += new System.EventHandler(this.AddEmployer_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

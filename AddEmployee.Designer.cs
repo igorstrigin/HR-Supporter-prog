@@ -223,8 +223,9 @@
             this.Controls.Add(this.tbSecondName);
             this.Controls.Add(this.tbName);
             this.Controls.Add(this.tbSurname);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "AddEmployee";
-            this.Text = "AddEmployee";
+            this.Text = "Добавить сотрудника";
             this.ResumeLayout(false);
             this.PerformLayout();
 
