@@ -41,6 +41,8 @@ namespace SalaryGUI
             OpenTable.CommandText = "select SUM(Salary) from MainInfo";
             OpenTable.Connection.Open();
             label2.Text = OpenTable.ExecuteScalar().ToString();
+            dataGridView1.AutoResizeColumns();
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
         private void btCalcSalary_Click(object sender, EventArgs e)
@@ -51,7 +53,6 @@ namespace SalaryGUI
         {
             Workers workers = new Workers(dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString(), 0, Convert.ToDateTime(dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString()), Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString()), "",0);
             CalcSalary calcSalary = new CalcSalary(workers);
-            calcSalary.Owner = this;
             calcSalary.ShowDialog();
         }
 
@@ -150,5 +151,7 @@ namespace SalaryGUI
             dataGridView1.DataSource = ds.Tables[0].DefaultView;
             OpenTable.Connection.Close();
         }
+
+
     }
 }

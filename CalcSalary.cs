@@ -14,9 +14,6 @@ namespace SalaryGUI
     public partial class CalcSalary : Form
     {
         DateTime dateTime;
-        //int Salary;
-        //int ParentID;
-        //int IDEmployee;
         public CalcSalary(Workers obj1)
         {
             InitializeComponent();
@@ -48,7 +45,7 @@ namespace SalaryGUI
 
         private void CalcSalary_Load(object sender, EventArgs e)
         {
-
+            dtSalary.MinDate = DateTime.Now;
         }
 
         private void button1_Click(object sender, EventArgs e)

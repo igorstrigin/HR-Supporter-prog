@@ -21,7 +21,7 @@ namespace SalaryGUI
         private void btEnter_Click(object sender, EventArgs e)
         {
             string Group = "";
-            string Login = "";
+            string Log = "";
             string Password = "";
             int startsalary = 0;
             DateTime dateTime = DateTime.Now;
@@ -40,34 +40,37 @@ namespace SalaryGUI
                         dateTime = dr.GetDateTime(2);
                         startsalary = dr.GetInt32(1);
                         Group = dr.GetString(0);
-                        Login = dr.GetString(3);
+                        Log = dr.GetString(3);
                         Password = dr.GetString(4);
                     }
                     
                 }
                 else { MessageBox.Show("Проверьте имя пользователя и пароль"); }
-                Workers work = new Workers(Login, 0, dateTime, startsalary, Password, 0);
+                Workers work = new Workers(Log, 0, dateTime, startsalary, Password, 0);
                 dr.Close();
                 Enter.Connection.Close(); 
             switch (Group)
             {
                 case "1)Работник":
-                    this.Hide();
+                    this.Visible = false;
                     Form form = new CalcSalary(work);
                     form.Show();
                     break;
                 case "2)Менеджер":
                     Form form1 = new CalcSalary(work);
-                    this.Hide();
+                    this.Visible = false;
                     form1.Show();
                     break;
                 case "3)Продавец":
                     Form form3 = new CalcSalary(work);
-                    this.Hide();
+                    this.Visible = false;
                     form3.Show();
                     break;
                 case "": break;
-                default: this.Hide(); Form form4 = new MainWindow(); form4.Show();
+                default:
+                    this.Visible = false;
+                    Form form4 = new MainWindow();
+                    form4.Show();
                     break;
             }
         }
