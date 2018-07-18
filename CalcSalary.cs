@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SQLite;
 
@@ -17,7 +10,7 @@ namespace SalaryGUI
         public CalcSalary(Workers obj1)
         {
             InitializeComponent();
-            SQLiteConnection DB = new SQLiteConnection(@"Data Source=Salary.db;Pooling=true;FailIfMissing=false;Version=3");
+            SQLiteConnection DB = new SQLiteConnection(@"Data Source=" + Environment.CurrentDirectory + "/x86/Salary.db;Pooling=true;FailIfMissing=false;Version=3");
             SQLiteCommand CalcSalary = new SQLiteCommand(DB);
             CalcSalary.Connection = DB;
             CalcSalary.CommandText = "select FIO, StartSalary, EntryDate, MainInfo.'Group',ParentID,IDEmployee from MainInfo where FIO=@FIO and StartSalary=@StartSalary and EntryDate=@EntryDate";
@@ -52,7 +45,7 @@ namespace SalaryGUI
         {
             int datecalc = dtSalary.Value.Year - dateTime.Year;
             int id = 0;
-            SQLiteConnection DB = new SQLiteConnection(@"Data Source=Salary.db;Pooling=true;FailIfMissing=false;Version=3");
+            SQLiteConnection DB = new SQLiteConnection(@"Data Source=" + Environment.CurrentDirectory + "/x86/Salary.db;Pooling=true;FailIfMissing=false;Version=3");
             SQLiteCommand getid = new SQLiteCommand(DB);
             getid.CommandText = "select IDEmployee from MainInfo where FIO=@FIO";
             getid.Parameters.AddWithValue("@FIO", lFIO.Text);

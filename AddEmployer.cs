@@ -22,7 +22,7 @@ namespace SalaryGUI
 
         private void AddEmployer_Load(object sender, EventArgs e)
         {
-            SQLiteConnection DB = new SQLiteConnection(@"Data Source=Salary.db;Pooling=true;FailIfMissing=false;Version=3");
+            SQLiteConnection DB = new SQLiteConnection(@"Data Source=" + Environment.CurrentDirectory + "/x86/Salary.db;Pooling=true;FailIfMissing=false;Version=3");
             SQLiteCommand CheckFIO = new SQLiteCommand(DB);
             CheckFIO.Connection = DB;
             CheckFIO.CommandText = "select MainInfo.FIO from MainInfo where MainInfo.'Group' <> 'Работник'";
@@ -47,7 +47,7 @@ namespace SalaryGUI
 
         private void btAddEmployer_Click(object sender, EventArgs e)
         {
-            SQLiteConnection DB = new SQLiteConnection(@"Data Source=Salary.db;Pooling=true;FailIfMissing=false;Version=3");
+            SQLiteConnection DB = new SQLiteConnection(@"Data Source=" + Environment.CurrentDirectory + "/x86/Salary.db;Pooling=true;FailIfMissing=false;Version=3");
             SQLiteCommand AddEmployer = new SQLiteCommand(DB);
             AddEmployer.Connection = DB;
             AddEmployer.CommandText = "select IDEmployee from MainInfo where FIO = @FIO";

@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SQLite;
 
@@ -27,7 +22,7 @@ namespace SalaryGUI
         private void MainWindow_Load(object sender, EventArgs e)
         {
             DataSet ds = new DataSet();
-            SQLiteConnection DB = new SQLiteConnection(@"Data Source=Salary.db;Pooling=true;FailIfMissing=false;Version=3");
+            SQLiteConnection DB = new SQLiteConnection(@"Data Source=" + Environment.CurrentDirectory + "/x86/Salary.db;Pooling=true;FailIfMissing=false;Version=3");
             SQLiteCommand OpenTable = new SQLiteCommand(DB);
             OpenTable.Connection = DB;
             OpenTable.CommandText = "select FIO as ФИО, StartSalary as 'Начальная зарплата', EntryDate as 'Дата вступления на работу', MainInfo.'Group' as 'Рабочая группа', Salary as 'Зарплата' from MainInfo order by MainInfo.'Group' asc";
@@ -66,7 +61,7 @@ namespace SalaryGUI
             List<int> startsalary = new List<int>();
             List<string> FIO = new List<string>();
 
-            SQLiteConnection DB = new SQLiteConnection(@"Data Source=Salary.db;Pooling=true;FailIfMissing=false;Version=3");
+            SQLiteConnection DB = new SQLiteConnection(@"Data Source=" + Environment.CurrentDirectory + "/x86/Salary.db;Pooling=true;FailIfMissing=false;Version=3");
             DataSet ds = new DataSet();
             
             SQLiteCommand UntilReset = new SQLiteCommand(DB);

@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SQLite;
 
@@ -20,7 +13,7 @@ namespace SalaryGUI
 
         public int GetEmployeeId()
         {
-            SQLiteConnection DB = new SQLiteConnection(@"Data Source=Salary.db;Pooling=true;FailIfMissing=false;Version=3");
+            SQLiteConnection DB = new SQLiteConnection(@"Data Source=" + Environment.CurrentDirectory + "/x86/Salary.db;Pooling=true;FailIfMissing=false;Version=3");
             SQLiteCommand AddNewEmployee = new SQLiteCommand(DB);
             AddNewEmployee.Connection = DB;
             AddNewEmployee.CommandText = "select IDEmployee from MainInfo order by IDEmployee desc";
@@ -49,7 +42,7 @@ namespace SalaryGUI
             string Group;
             string Password = tbPassword.Text;
             int ParentID = 0;
-            SQLiteConnection DB = new SQLiteConnection(@"Data Source=Salary.db;Pooling=true;FailIfMissing=false;Version=3");
+            SQLiteConnection DB = new SQLiteConnection(@"Data Source=" + Environment.CurrentDirectory + "/x86/Salary.db;Pooling=true;FailIfMissing=false;Version=3");
             SQLiteCommand AddInBase = new SQLiteCommand(DB);
             AddInBase.Connection = DB;
             AddInBase.CommandText = "insert into MainInfo(IDEmployee,FIO,EntryDate,StartSalary,'Group',Password,ParentID,Salary) values (@IDEmployee,@FIO,@EntryDate,@StartSalary,@Group,@Password,@ParentID,@Salary)";

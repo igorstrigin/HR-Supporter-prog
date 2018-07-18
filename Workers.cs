@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.SQLite;
 
 namespace SalaryGUI
@@ -53,7 +49,7 @@ namespace SalaryGUI
             {
                 int tempSalary = 0;
                 
-                    SQLiteConnection DB = new SQLiteConnection(@"Data Source=Salary.db;Pooling=true;FailIfMissing=false;Version=3");
+                    SQLiteConnection DB = new SQLiteConnection(@"Data Source=x86\\Salary.db;Pooling=true;FailIfMissing=false;Version=3");
                     SQLiteCommand ManagerPlus = new SQLiteCommand(DB);
                     ManagerPlus.Connection = DB;
                     ManagerPlus.CommandText = "select MainInfo.StartSalary,MainInfo.'Group',MainInfo.EntryDate, MainInfo.IDEmployee, MainInfo.ParentID from MainInfo where ParentId = @ParentID";
@@ -96,8 +92,8 @@ namespace SalaryGUI
             {
                 int tempSalary = 0;
                 int temp = 0;
-                SQLiteConnection DB = new SQLiteConnection(@"Data Source=Salary.db;Pooling=true;FailIfMissing=false;Version=3");
-                SQLiteCommand ManagerPlus = new SQLiteCommand(DB);
+            SQLiteConnection DB = new SQLiteConnection(@"Data Source=" + Environment.CurrentDirectory + "/x86/Salary.db;Pooling=true;FailIfMissing=false;Version=3");
+            SQLiteCommand ManagerPlus = new SQLiteCommand(DB);
                 ManagerPlus.Connection = DB;
                 ManagerPlus.CommandText = "select MainInfo.StartSalary,MainInfo.'Group',MainInfo.EntryDate, MainInfo.IDEmployee, MainInfo.ParentID from MainInfo where ParentId = @ParentID order by MainInfo.'Group' desc";
                 ManagerPlus.Parameters.AddWithValue("@ParentID", ParentID);
@@ -165,7 +161,7 @@ namespace SalaryGUI
         {
             int tempSalary = 0;
 
-            SQLiteConnection DB = new SQLiteConnection(@"Data Source=Salary.db;Pooling=true;FailIfMissing=false;Version=3");
+            SQLiteConnection DB = new SQLiteConnection(@"Data Source=" + Environment.CurrentDirectory + "/x86/Salary.db;Pooling=true;FailIfMissing=false;Version=3");
             SQLiteCommand SalesPlus = new SQLiteCommand(DB);
             SalesPlus.Connection = DB;
             SalesPlus.CommandText = "with NewTable as (select MainInfo.IDEmployee, MainInfo.ParentID, MainInfo.StartSalary, MainInfo.EntryDate, MainInfo.'Group' from MainInfo where IDEmployee = @IDEmployee union all select N.IDEmployee, N.ParentID, N.StartSalary, N.EntryDate, N.'Group' from NewTable inner join MainInfo N on NewTable.IDEmployee = N.ParentID) select StartSalary, NewTable.'Group', EntryDate, NewTable.IDEmployee ,NewTable.ParentID from NewTable where IDEmployee <> @IDEmployee";
@@ -210,7 +206,7 @@ namespace SalaryGUI
         {
             int tempSalary = 0;
 
-            SQLiteConnection DB = new SQLiteConnection(@"Data Source=Salary.db;Pooling=true;FailIfMissing=false;Version=3");
+            SQLiteConnection DB = new SQLiteConnection(@"Data Source=" + Environment.CurrentDirectory + "/x86/Salary.db;Pooling=true;FailIfMissing=false;Version=3");
             SQLiteCommand ManagerPlus = new SQLiteCommand(DB);
             ManagerPlus.Connection = DB;
             ManagerPlus.CommandText = "with NewTable as (select MainInfo.IDEmployee, MainInfo.ParentID, MainInfo.StartSalary, MainInfo.EntryDate, MainInfo.'Group' from MainInfo where IDEmployee = @IDEmployee union all select N.IDEmployee, N.ParentID, N.StartSalary, N.EntryDate, N.'Group' from NewTable inner join MainInfo N on NewTable.IDEmployee = N.ParentID) select StartSalary, NewTable.'Group', EntryDate, NewTable.IDEmployee ,NewTable.ParentID from NewTable where IDEmployee <> @IDEmployee";
